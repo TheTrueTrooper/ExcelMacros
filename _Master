@@ -12,7 +12,20 @@ ActiveSheet.ExportAsFixedFormat _
         OpenAfterPublish:=True
 End Sub
 
-Attribute VB_Name = "Module2"
 Sub Copier()
 ThisWorkbook.ActiveSheet.Copy After:=Sheets(Sheets.Count)
+End Sub
+
+Sub MultiCopier()
+Dim CopyToNum As Integer
+Dim I As Integer
+CopyToNum = InputBox("How many copies would you like", "Excel Multi Copy", 1)
+
+Dim SheetToCopy As Worksheet
+
+Set SheetToCopy = ActiveSheet
+
+For I = 1 To CopyToNum
+     SheetToCopy.Copy After:=Sheets(Sheets.Count)
+Next I
 End Sub
