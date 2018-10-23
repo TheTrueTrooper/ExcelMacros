@@ -1,0 +1,45 @@
+
+
+Private Sub CoBu_Ok_Click()
+
+    Dim varResult As Variant
+    varResult = Application.GetSaveAsFilename(FileFilter:="Visual Basic(*.bas), *.bas", Title:="Generated Code Save")
+    '"Visual Basic File", ".bas", 0
+
+    If varResult <> False Then
+    
+        MasterScript.EasyConfigReturn.Answer = InputReturnAnswer.Ok
+        MasterScript.EasyConfigReturn.Config_.CustomerNameSearchHeaders = TB_Customer.Text
+        MasterScript.EasyConfigReturn.Config_.RequestedBySearchHeaders = TB_Requester.Text
+        MasterScript.EasyConfigReturn.Config_.FRNumberSearchHeaders = TB_FRNum.Text
+        MasterScript.EasyConfigReturn.Config_.DateSearchHeaders = TB_Date.Text
+        MasterScript.EasyConfigReturn.Config_.BranchNumberSearchHeaders = TB_BranchNum.Text
+        MasterScript.EasyConfigReturn.Config_.DCASearchHeaders = TB_DCA.Text
+        MasterScript.EasyConfigReturn.Config_.CommentSearchHeaders = TB_Comment.Text
+        MasterScript.EasyConfigReturn.Config_.ResultsSearchHeaders = TB_Results.Text
+        MasterScript.EasyConfigReturn.SaveLocation = varResult
+        
+        Set FileSave = Nothing
+        Unload EasyConfig
+    End If
+End Sub
+
+
+Private Sub CoBu_Cancel_Click()
+    EasyConfigReturn.Answer = InputReturnAnswer.Cancel
+    Unload EasyConfig
+End Sub
+
+
+Public Sub UserForm_Initialize()
+    MasterScript.EasyConfigReturn.Answer = InputReturnAnswer.None
+    TB_Customer.Text = MasterScript.StrConfigReturn.CustomerNameSearchHeaders
+    TB_Requester.Text = MasterScript.StrConfigReturn.RequestedBySearchHeaders
+    TB_FRNum.Text = MasterScript.StrConfigReturn.FRNumberSearchHeaders
+    TB_Date.Text = MasterScript.StrConfigReturn.DateSearchHeaders
+    TB_BranchNum.Text = MasterScript.StrConfigReturn.BranchNumberSearchHeaders
+    TB_DCA.Text = MasterScript.StrConfigReturn.DCASearchHeaders
+    TB_Comment.Text = MasterScript.StrConfigReturn.CommentSearchHeaders
+    TB_Results.Text = MasterScript.StrConfigReturn.ResultsSearchHeaders
+End Sub
+
